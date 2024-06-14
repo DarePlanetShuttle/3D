@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Computación Espacial</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,27 +15,34 @@
 </head>
 
 <body>
-    <header>
-        <img src="logo.jpeg" alt="Logo" id="logo">
+    <header class="text-center my-4">
+        <img src="logo.jpeg" alt="Logo" id="logo" class="img-fluid mb-3">
         <h1>Demo Computación Espacial</h1>
     </header>
     <nav>
-        <ul>
-            <li><a href="https://dareplanetshuttle.github.io/VR2/">Imagen 360 + IA</a></li>
-            <li><a href="https://dareplanetshuttle.github.io/3D/1/">3D + AR</a></li>
-            <li><a href="https://dareplanetshuttle.github.io/3D/2/">360 + 3D</a></li>
-            <!--li><a href="https://dareplanetshuttle.github.io/3D/3/">360 + 3D</a></!--li>-->
-        </ul>
-        <ul>
-            <!--li><a href="https://dareplanetshuttle.github.io/3D/4/">3D + AR</a></li>
-            <li><a href="https://dareplanetshuttle.github.io/3D/5/">3D + AR</a></li>-->
-            <li><a href="https://dareplanetshuttle.github.io/3D/6/">3D + AR</a></li>
-            <li><a href="https://msub2.github.io/hello-webxr/">Experiencia 3D</a></li>
-        </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="https://dareplanetshuttle.github.io/VR2/">Imagen 360 + IA</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://dareplanetshuttle.github.io/3D/1/">3D + AR</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://dareplanetshuttle.github.io/3D/2/">360 + 3D</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="https://dareplanetshuttle.github.io/3D/6/">3D + AR</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://msub2.github.io/hello-webxr/">Experiencia 3D</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </nav>
-    <div class="footer">
-        <img src="logo-dp.png" alt="Logo" id="logo2">
-    </div>
+    <footer class="text-center py-4">
+        <img src="logo-dp.png" alt="Logo" id="logo2" class="img-fluid">
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -51,10 +51,10 @@
     </script>
   </head>
   <body>
-    <a-scene physics="debug: false">
+    <a-scene physics="debug: false" vr-mode-ui="enabled: false">
       <!-- Assets -->
       <a-assets>
-        <a-asset-item id="roomModel" src="./public/assets/espacio.glb"></a-asset-item>
+        <a-asset-item id="roomModel" src="./public/assets/myhouse.glb"></a-asset-item>
       </a-assets>
 
       <!-- Environment -->
@@ -82,7 +82,7 @@
       <!-- Room Model -->
       <a-entity
         gltf-model="#roomModel"
-        position="0 0.65 0"
+        position="0 2.5 0"
         scale="1 1 1"
         class="collidable"
         static-body
@@ -99,18 +99,11 @@
           dynamic-body
           vertical-movement="speed: 0.4"
         ></a-entity>
-
-        <!-- Teleport Controls -->
-        <a-entity
-          teleport-controls="button: trigger; collisionEntities: .collidable"
-          raycaster="objects: .collidable"
-          line="color: #FF0000; opacity: 0.75"
-        ></a-entity>
       </a-entity>
 
       <!-- VR Controller Controls -->
-      <a-entity laser-controls="hand: right"></a-entity>
-      <a-entity laser-controls="hand: left"></a-entity>
+      <a-entity laser-controls="hand: right" teleport-controls="cameraRig: #rig; teleportOrigin: #camera; button: trigger; collisionEntities: .collidable" thumbstick-controls="fly: false"></a-entity>
+      <a-entity laser-controls="hand: left" teleport-controls="cameraRig: #rig; teleportOrigin: #camera; button: trigger; collisionEntities: .collidable" thumbstick-controls="fly: false"></a-entity>
     </a-scene>
   </body>
 </html>

@@ -2,7 +2,7 @@ body {
     font-family: "Oswald", sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('https://img.freepik.com/foto-gratis/retrato-mujer-casco-realidad-virtual_23-2148912808.jpg?t=st=1718637814~exp=1718641414~hmac=d5f35015f341d91d7f9e1c6c004f7eeae8dbf473431756745e6e98f0da867e88&w=826');
+    background-image: url('background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -56,6 +56,13 @@ nav ul li a {
 
 nav ul li a:hover {
     background-color: #6c757d;
+}
+
+.nav-link{
+    padding: 3rem 1rem;
+    text-align: center;
+    border-radius: 15px;
+    border: 5px solid white;
 }
 
 footer{

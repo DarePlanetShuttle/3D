@@ -48,7 +48,6 @@
         <!-- Assets -->
         <a-assets>
             <a-asset-item id="roomModel" src="./public/assets/myhouse.glb"></a-asset-item>
-            <a-mixin id="blink" blink-controls="button: trigger; cameraRig: #rig; teleportOrigin: #player;"></a-mixin>
         </a-assets>
 
         <!-- Environment -->
@@ -78,7 +77,7 @@
             gltf-model="#roomModel"
             position="0 0 0"
             scale="1 1 1"
-            class="collidable"
+            class="navmesh"
             static-body
         ></a-entity>
 
@@ -95,8 +94,8 @@
             ></a-entity>
 
             <!-- VR Controller Controls with Teleport -->
-            <a-entity id="left-hand" hand-controls="hand: left" mixin="blink"></a-entity>
-            <a-entity id="right-hand" hand-controls="hand: right" mixin="blink"></a-entity>
+            <a-entity id="left-hand" hand-controls="hand: left" laser-controls="hand: left" teleport-controls="cameraRig: #rig; teleportOrigin: #player; collisionEntities: .navmesh"></a-entity>
+            <a-entity id="right-hand" hand-controls="hand: right" laser-controls="hand: right" teleport-controls="cameraRig: #rig; teleportOrigin: #player; collisionEntities: .navmesh"></a-entity>
         </a-entity>
 
         <a-gltf-model class="navmesh" src="#roomModel" visible="false" nav-mesh></a-gltf-model>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebXR Room</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe-extras@6.1.0/dist/aframe-extras.min.js"></script>
+    <script>
+      AFRAME.registerComponent('vertical-movement', {
+        schema: {
+          speed: { type: 'number', default: 0.1 }
+        },
+
+        init: function () {
+          this.velocity = new THREE.Vector3();
+          this.direction = new THREE.Vector3();
+          this.keydown = this.keydown.bind(this);
+          this.keyup = this.keyup.bind(this);
+          window.addEventListener('keydown', this.keydown);
+          window.addEventListener('keyup', this.keyup);
+        },
+
+        keydown: function (event) {
+          switch (event.code) {
+            case 'KeyE': this.velocity.y = this.data.speed; break;
+            case 'KeyQ': this.velocity.y = -this.data.speed; break;
+          }
+        },
+
+        keyup: function (event) {
+          switch (event.code) {
+            case 'KeyE':
+            case 'KeyQ': this.velocity.y = 0; break;
+          }
+        },
+
+        tick: function (time, timeDelta) {
+          const position = this.el.getAttribute('position');
+          position.y += this.velocity.y * (timeDelta / 1000);
+          this.el.setAttribute('position', position);
+        },
+
+        remove: function () {
+          window.removeEventListener('keydown', this.keydown);
+          window.removeEventListener('keyup', this.keyup);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene physics="debug: false" vr-mode-ui="enabled: true" ar-mode-ui="enabled: false">
+      <!-- Assets -->
+      <a-assets>
+        <a-asset-item id="roomModel" src="./public/assets/myhouse.glb"></a-asset-item>
+        <a-mixin id="blink" blink-controls="button:trigger; rotateOnTeleport:false; cameraRig: #rig; teleportOrigin: #player; collisionEntities:.navmesh;"></a-mixin>
+      </a-assets>
+
+      <!-- Environment -->
+      <a-sky color="#ECECEC"></a-sky>
+      <a-plane
+        position="0 -5 0"
+        rotation="-90 0 0"
+        width="100"
+        height="100"
+        color="#7BC8A4"
+        static-body
+      ></a-plane>
+
+      <!-- Lighting -->
+      <a-entity light="type: ambient; color: #888"></a-entity>
+      <a-entity
+        light="type: directional; color: #FFF; intensity: 0.5"
+        position="0 4 -4"
+      ></a-entity>
+      <a-entity
+        light="type: directional; color: #FFF; intensity: 0.5"
+        position="0 4 4"
+      ></a-entity>
+
+      <!-- Room Model -->
+      <a-entity
+        gltf-model="#roomModel"
+        position="0 0 0"
+        scale="1 1 1"
+        class="collidable"
+        static-body
+      ></a-entity>
+
+      <!-- Camera and Controls -->
+      <!--a-entity id="cameraRig" movement-controls="fly: false; speed: 0.05; enabled: true">
+        <a-entity
+          id="head"
+          camera="userHeight: 0"
+          look-controls="pointerLockEnabled: true"
+          wasd-controls="acceleration: 4"
+          position="0 0.53 0"
+          dynamic-body
+          vertical-movement="speed: 0.4"
+        ></a-entity>
+
+        <!-- VR Controller Controls with Teleport -->
+        <!--a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;"></!--a-entity>
+        <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;"></a-entity>
+      </a-entity-->
+
+      <a-gltf-model class="navmesh" src="#roomModel" visible="false" nav-mesh></a-gltf-model>
+
+      <a-entity id="rig" spawn-in-circle="radius:3" networked="template:#rig-template;attachTemplateToLocal:false;" simple-navmesh-constraint="navmesh:.navmesh;fall:0.5;height:0;exclude:.navmesh-hole;" movement-controls="speed:0.15;camera:#player;">
+        <!-- camera -->
+        <a-entity id="player" camera="near:0.01;" look-controls position="0 1.65 0" networked="template:#head-template;attachTemplateToLocal:false;" visible="false"></a-entity>
+
+          <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color: #15ACCF" networked="template:#left-hand-template; handModelStyle: lowPoly; color: #15ACCF" mixin="blink">
+          </a-entity>
+
+          <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #15ACCF" networked="template:#right-hand-template; handModelStyle: lowPoly; color: #15ACCF" laser-controls raycaster="showLine:true; lineColor:#7cfc00; far: 10; interval: 0; objects: [html], .raycastable, .clickable, .fountian_ball, .cylinder4, a-link;">
+          </a-entity>
+
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>

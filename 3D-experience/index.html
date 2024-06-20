@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple WebXR Teleport Example</title>
+    <title>VR Teleport Example</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-teleport-controls@6.1.0/dist/aframe-teleport-controls.min.js"></script>
 </head>
@@ -24,19 +24,23 @@
         <!-- 3D Model -->
         <a-entity gltf-model="#model" position="0 0 0" scale="1 1 1"></a-entity>
 
-        <!-- Invisible Plane for Teleportation -->
-        <a-plane position="0 0 0" rotation="-90 0 0" width="100" height="100" visible="false" class="teleport-surface"></a-plane>
-
-        <!-- Camera Rig with Mouse Cursor for Teleport Controls -->
+        <!-- Camera Rig with Teleport Controls -->
         <a-entity id="rig" position="0 1.6 0">
             <a-entity id="camera" camera look-controls position="0 0 0"></a-entity>
             <a-entity 
-                id="cursor" 
-                cursor="rayOrigin: mouse" 
-                raycaster="objects: .teleport-surface"
+                id="left-hand" 
+                laser-controls="hand: left" 
+                teleport-controls="cameraRig: #rig; teleportOrigin: #camera; button: trigger; collisionEntities: .teleport-surface">
+            </a-entity>
+            <a-entity 
+                id="right-hand" 
+                laser-controls="hand: right" 
                 teleport-controls="cameraRig: #rig; teleportOrigin: #camera; button: trigger; collisionEntities: .teleport-surface">
             </a-entity>
         </a-entity>
+
+        <!-- Invisible Plane for Teleportation -->
+        <a-plane position="0 0 0" rotation="-90 0 0" width="100" height="100" visible="false" class="teleport-surface"></a-plane>
     </a-scene>
 </body>
 </html>

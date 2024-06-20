@@ -87,7 +87,7 @@
       ></a-entity>
 
       <!-- Camera and Controls -->
-      <a-entity id="cameraRig" movement-controls="fly: false; speed: 0.05; enabled: true">
+      <!--a-entity id="cameraRig" movement-controls="fly: false; speed: 0.05; enabled: true">
         <a-entity
           id="head"
           camera="userHeight: 0"
@@ -99,9 +99,9 @@
         ></a-entity>
 
         <!-- VR Controller Controls with Teleport -->
-        <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;"></a-entity>
+        <!--a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;"></!--a-entity>
         <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;"></a-entity>
-      </a-entity>
+      </a-entity-->
 
       <!-- Basic movement and teleportation  -->
       <a-entity id="cameraRig" movement-controls="constrainToNavMesh: true;" navigator="cameraRig: #cameraRig; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" position="0 0 0" rotation="0 0 0">

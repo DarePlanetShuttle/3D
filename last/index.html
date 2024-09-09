@@ -13,40 +13,11 @@
 
 <body>
 
-<script>
-// if raycaster is pointing at this object, press trigger to change color
-AFRAME.registerComponent("raycaster-color-change", {
-    init: function () 
-    {
-        this.colors = ["red", "orange", "yellow", "green", "blue", "violet"];
-
-        this.controllerData = document.querySelector("#controller-data").components["controller-listener"];        
-        this.hoverData      = this.el.components["raycaster-target"];
-    },
-
-    tick: function()
-    {
-        if (this.hoverData.hasFocus && this.controllerData.rightTrigger.pressed )
-        {
-            let index = Math.floor( this.colors.length * Math.random() );
-            let color = this.colors[index];
-            this.el.setAttribute("color", color);
-        }
-        
-        if (!this.hoverData.hasFocus || this.controllerData.rightTrigger.released)
-        {
-            this.el.setAttribute("color", "#CCCCCC");
-        }
-    }
-});
-
-
-</script>
-
 <a-scene environment="preset: default;" renderer="antialias: true;">
         
     <a-assets>
         <img id="gradient" src="images/gradient-fade.png" />
+        <a-asset-item id="model" src="myhouse.glb"></a-asset-item>
     </a-assets>
 
     <a-sky 
@@ -65,7 +36,7 @@ AFRAME.registerComponent("raycaster-color-change", {
 
     <a-entity 
         id="player" 
-        position="0 0 0" 
+        position="0 0.4 0" 
         player-move="controllerListenerId: #controller-data;
                      navigationMeshClass: groundPlane;">
         
@@ -93,68 +64,13 @@ AFRAME.registerComponent("raycaster-color-change", {
 
     </a-entity>
 
-    <a-torus-knot 
-        p="2" q="3" radius="0.5" radius-tubular="0.1"
-        position = "-2.5 1.5 -4"
-        color="#CC3333"
+    <!-- Load the .glb model -->
+    <a-entity
+        gltf-model="#model"
+        position="0 1.7 0"
+        scale="1 1 1"
         raycaster-target>
-    </a-torus-knot>
-    
-    <a-box
-        width = "2" height = "1" depth = "1"
-        position = "-1 0.5 -3"
-        rotation = "0 45 0"  
-        color = "#FF8800"
-        class = ""
-        raycaster-target>
-    </a-box>
-
-    <a-sphere
-        radius = "1.25"
-        position = "0 1.25 -5"
-        color = "#DDBB00"
-        raycaster-target>
-    </a-sphere>
-    
-    <a-cylinder
-        radius = "0.5" height = "1.5"
-        position = " 1 0.75 -3"
-        color = "#008800" 
-        raycaster-target>
-    </a-cylinder>
-
-    <a-cone
-        radius-bottom = "1" radius-top = "0" height = "2"
-        position = "3 1 -4"
-        color = "#4444CC"
-        raycaster-target>
-    </a-cone>
-    
-    <a-torus 
-        radius="0.5" radius-tubular="0.1"
-        position = "2 3 -4"
-        rotation = "30 -20 0"
-        color="#8800FF"
-        raycaster-target>
-    </a-torus>
-
-    <!-- demo interaction boxes -->
-
-    <a-dodecahedron
-        radius = "0.5"
-        position = "-0.8 1 -2"
-        color = "#EEEEEE"
-        raycaster-target="canGrab: true;"
-        raycaster-color-change>
-    </a-dodecahedron>
-
-    <a-icosahedron
-        radius = "0.5"
-        position = "0.8 1 -2"
-        color = "#EEEEEE"
-        raycaster-target="canGrab: true;"
-        raycaster-color-change>
-    </a-icosahedron>
+    </a-entity>
 
 </a-scene>
 

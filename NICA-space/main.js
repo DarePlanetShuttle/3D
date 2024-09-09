@@ -749,7 +749,7 @@ async function main() {
         // "nike.splat",
         // location.href,
         params.get("url") || "open_space.splat",
-        "./public/assets/",
+        "https://dareplanetshuttle.github.io/3D/NICA-space/public/assets/",
     );
     const req = await fetch(url, {
         mode: "cors", // no-cors, *cors, same-origin
